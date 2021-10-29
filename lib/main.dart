@@ -5,6 +5,8 @@ import 'package:e_commerce/screens/dashboard/home_screen/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
