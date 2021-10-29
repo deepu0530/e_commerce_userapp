@@ -1,6 +1,7 @@
 import 'package:e_commerce/screens/authentication/register.dart';
 import 'package:e_commerce/screens/persistant_bottom_navbar.dart';
-import 'package:e_commerce/screens/utils/colors.dart';
+
+import 'package:e_commerce/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
