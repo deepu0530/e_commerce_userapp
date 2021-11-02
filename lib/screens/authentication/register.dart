@@ -1,4 +1,5 @@
 
+import 'package:e_commerce/services/authentication_services.dart';
 import 'package:e_commerce/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
     bool _passwordVisible = true;
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+final AuthenticationService _auth =AuthenticationService();
+
+ void createUser()async{
+   
+dynamic result =await _auth.CreateNewUser(_nameController.text, _emailController.text, _passwordController.text);
+ 
+  if(result == null){
+    print("Email is not valid");
+  //Fluttertoast.showToast(msg:"hai");
+  }
+  
+  else{
+    print(result.toString());
+
+    _nameController.clear();
+    _passwordController.clear();
+    _emailController.clear();
+    Navigator.pop(context);
+  }
+  
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -223,7 +247,7 @@ final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
                 
                   GestureDetector(
                     onTap: (){
-                    
+                    createUser();
                     },
                     child: Container(
                       height: 55,

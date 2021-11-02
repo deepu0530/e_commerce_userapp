@@ -1,5 +1,7 @@
 import 'package:e_commerce/screens/authentication/register.dart';
+import 'package:e_commerce/screens/dashboard/home_screen/home.dart';
 import 'package:e_commerce/screens/persistant_bottom_navbar.dart';
+import 'package:e_commerce/services/authentication_services.dart';
 
 import 'package:e_commerce/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,25 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _passwordVisible = true;
 
   final _formKey = GlobalKey<FormState>();
+final AuthenticationService _auth =AuthenticationService();
+    void signInUser()async{
+   
+dynamic authResult =await _auth.login( _emailController.text, _passwordController.text);
+ 
+  if(authResult == null){
+    print("Email is not valid");
+  //Fluttertoast.showToast(msg:"hai");
+  }
+  
+  else{
+    print(authResult.toString());
+
+    
+    _passwordController.clear();
+    _emailController.clear();
+    Navigator.push(context, MaterialPageRoute(builder: (Context)=>PersistantBottoNavbar()));
+  }
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -174,10 +195,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (Context) => PersistantBottoNavbar()));
+                      signInUser();
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (Context) => PersistantBottoNavbar()));
                     },
                     child: Container(
                       height: 55,

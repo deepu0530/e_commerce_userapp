@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:e_commerce/screens/authentication/login.dart';
+import 'package:e_commerce/services/authentication_services.dart';
 
 import 'package:e_commerce/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+final AuthenticationService _auth =AuthenticationService();
+
   List imglist = [
     "assets/images/offer1.png",
     "assets/images/offer2.png",
@@ -383,10 +388,14 @@ class _HomeState extends State<Home> {
                             ),
                     ),
                     leading: Icon(Icons.logout,color: AppColors.appColor,),
-                    onTap: () {
-                      Navigator.pop(context);
+                    onTap: ()async {
+                                            await _auth.signOut().then((result) {
+      
+            Navigator.of(context).pop(true);
+          });
+          
                     },
-                  ),
+                                   ),
                 ],
               ),
               Column(
